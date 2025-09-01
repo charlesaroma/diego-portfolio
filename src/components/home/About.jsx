@@ -6,12 +6,36 @@ const About = () => {
     <section className="py-20 px-4 bg-gray-900/50">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Content Section */}
+          {/* Photo Section - appears first on mobile */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative w-full max-w-md mx-auto md:order-2"
+          >
+            {/* Image container */}
+            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden rounded-xl border border-indigo-500/40">
+              <motion.img
+                src="https://ik.imagekit.io/ldeismm29/Diego-Portfolio/IMG_0368.JPEG?updatedAt=1756742011888"
+                alt="Diego Mwesigwa"
+                className="w-full h-full object-cover"
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              />
+
+              {/* Corner accents */}
+              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-indigo-400/40 rounded-tl-xl"></div>
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-indigo-400/40 rounded-br-xl"></div>
+            </div>
+          </motion.div>
+          
+          {/* Content Section - appears second on mobile, first on desktop */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6"
+            className="space-y-6 md:order-1"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-indigo-400">
               About Diego
@@ -30,30 +54,6 @@ const About = () => {
               His journey spans poetry, acting, writing, and law — each discipline informing the others 
               to create a unique perspective on creativity, justice, and human expression.
             </p>
-          </motion.div>
-          
-          {/* Photo Section */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative w-full max-w-md mx-auto"
-          >
-            {/* Image container */}
-            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden rounded-xl border border-indigo-500/40">
-              <motion.img
-                src="/Diego.jpg"
-                alt="Diego Mwesigwa"
-                className="w-full h-full object-cover"
-                initial={{ scale: 1.1 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              />
-
-              {/* Corner accents */}
-              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-indigo-400/40 rounded-tl-xl"></div>
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-indigo-400/40 rounded-br-xl"></div>
-            </div>
           </motion.div>
         </div>
       </div>

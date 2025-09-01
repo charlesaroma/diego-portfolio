@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 //Home Component Imports
 import HomeHero from '../components/home/HomeHero'
 import About from '../components/home/About'
+import ProjectsPage from '../components/home/ProjectsPage'
 
 const Home = () => {
   useEffect(() => {
@@ -17,6 +18,7 @@ const Home = () => {
     <div className='flex flex-col'>
         <HomeHero />
         <About />
+        <ProjectsPage />
     </div>
   )
 }
