@@ -1,3 +1,5 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 //navigation imports
 import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
@@ -5,7 +7,8 @@ import Footer from "./components/Layout/Footer";
 //pages imports
 import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+
 
 function App() {
   return (

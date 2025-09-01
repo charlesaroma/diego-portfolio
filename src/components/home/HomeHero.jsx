@@ -52,7 +52,7 @@ const HomeHero = () => {
       // Typing or deleting
       const speed = isDeleting ? 50 : 100;
       timeout = setTimeout(() => {
-        setDisplayText(prev => {
+        setDisplayText((prev) => {
           if (isDeleting) {
             return currentProfession.substring(0, prev.length - 1);
           } else {
@@ -89,7 +89,7 @@ const HomeHero = () => {
               className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center border border-indigo-500/40 transition-all duration-300 group-hover:border-indigo-400/50"
               whileHover={{ scale: 1.1 }}
             >
-              <Icon 
+              <Icon
                 icon={social.icon}
                 className="w-4 h-4 text-indigo-400 transition-colors duration-300 group-hover:text-indigo-300"
               />
@@ -121,7 +121,7 @@ const HomeHero = () => {
               className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center border border-indigo-500/40 transition-all duration-300 group-hover:border-indigo-400/50"
               whileHover={{ scale: 1.1 }}
             >
-              <Icon 
+              <Icon
                 icon={social.icon}
                 className="w-5 h-5 text-indigo-400 transition-colors duration-300 group-hover:text-indigo-300"
               />
@@ -138,9 +138,41 @@ const HomeHero = () => {
       </motion.div>
 
       {/* Main Layout Container */}
-      <div className="min-h-screen flex">
-        {/* Content Section - Takes left space */}
-        <div className="flex-1 flex items-center justify-center lg:justify-start px-4 sm:px-8 lg:pl-20 xl:pl-32">
+      <div className="min-h-screen flex flex-col lg:flex-row">
+        {/* Mobile Image Section - Show on mobile, hide on desktop */}
+        <div className="flex lg:hidden items-end justify-center pt-16 px-4">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="w-full max-w-[400px] mb-0"
+          >
+            <div className="relative w-full aspect-[5/6] overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  className="w-full h-full relative"
+                >
+                  <img
+                    src={images[current]}
+                    alt="Diego Mwesigwa"
+                    className="w-full h-full object-cover relative z-10"
+                    loading={current === 0 ? "eager" : "lazy"}
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#090A17]/60 z-20" />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Content Section - Takes left space on desktop */}
+        <div className="flex-1 flex items-center justify-center lg:justify-start px-4 sm:px-8 lg:pl-20 xl:pl-32 pb-20">
           <motion.div
             className="text-center lg:text-left max-w-2xl z-10"
             initial={{ opacity: 0, x: -20 }}
@@ -150,7 +182,7 @@ const HomeHero = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-light text-[#e1e1dd] mb-4 sm:mb-6">
               Diego Mwesigwa
             </h1>
-            
+
             <div className="text-lg sm:text-xl lg:text-2xl font-medium mb-4 sm:mb-6 text-[#bcbcb8] min-h-[2rem] lg:min-h-[3rem]">
               <span>{displayText}</span>
               <motion.span
@@ -167,10 +199,7 @@ const HomeHero = () => {
 
             {/* Call to Action Buttons */}
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-center lg:justify-start">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   to="/portfolio"
                   className="bg-transparent cursor-pointer border-2 border-[#e1e1dd] text-[#e1e1dd] py-2 px-4 md:px-8 md:py-3 rounded-lg text-base sm:text-lg font-medium flex items-center w-auto justify-center"
@@ -178,10 +207,7 @@ const HomeHero = () => {
                   View Portfolio <Icon icon="mdi:arrow-right" className="ml-2 w-5 h-5" />
                 </Link>
               </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   to="/contact"
                   className="text-[#bcbcb8] cursor-pointer px-4 py-2 sm:px-6 md:px-8 md:py-3 rounded-lg text-base sm:text-lg font-normal flex items-center w-full sm:w-auto justify-center"
@@ -193,7 +219,7 @@ const HomeHero = () => {
           </motion.div>
         </div>
 
-        {/* Image Section - Fixed to right side and bottom */}
+        {/* Desktop Image Section - Fixed to right side and bottom, show on desktop only */}
         <div className="hidden lg:flex items-end justify-end">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -226,40 +252,6 @@ const HomeHero = () => {
             </div>
           </motion.div>
         </div>
-      </div>
-
-      {/* Mobile Image - Centered */}
-      <div className="lg:hidden flex justify-center pb-20">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="w-full max-w-[280px] md:max-w-[340px]"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <div className="relative w-full aspect-square overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                className="w-full h-full rounded-2xl relative"
-              >
-                <img
-                  src={images[current]}
-                  alt="Diego Mwesigwa"
-                  className="w-full h-full object-contain relative z-10"
-                  loading={current === 0 ? "eager" : "lazy"}
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#090A17]/60 z-20" />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
