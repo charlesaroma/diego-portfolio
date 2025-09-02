@@ -3,112 +3,148 @@ import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 
 function ContactPage() {
-  const pageVariants = {
-    initial: { opacity: 0, y: 50 },
-    in: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
-    out: { opacity: 0, y: -50, transition: { duration: 0.5, ease: "easeIn" } },
-  };
-
   const contactInfo = [
     {
       icon: "mdi:email",
       label: "Email",
       value: "diegomwesigwa278@gmail.com",
       link: "mailto:diegomwesigwa278@gmail.com",
-      accent: "indigo"
+      description: "Professional inquiries & collaborations"
     },
     {
       icon: "mdi:instagram",
       label: "Instagram",
       value: "@diego_thedarkknight",
       link: "https://www.instagram.com/diego_thedarkknight/",
-      accent: "purple"
+      description: "Behind the scenes & daily updates"
     },
     {
       icon: "mdi:twitter",
       label: "X (Twitter)",
       value: "@DiegoMwesigwa",
       link: "https://twitter.com/DiegoMwesigwa",
-      accent: "fuchsia"
+      description: "Thoughts & industry insights"
     },
     {
       icon: "mdi:tiktok",
       label: "TikTok",
       value: "@diego.thedark.knight",
       link: "https://www.tiktok.com/@diego.thedark.knight",
-      accent: "indigo"
+      description: "Creative content & performances"
     },
     {
       icon: "mdi:linkedin",
       label: "LinkedIn",
       value: "Diego Mwesigwa",
       link: "https://www.linkedin.com/in/diego-mwesigwa-8a4bb6108/",
-      accent: "purple"
+      description: "Professional network & legal services"
     }
   ];
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <motion.section
-      id='contact'
-      className="container mx-auto p-8 bg-black/40 backdrop-blur-md rounded-2xl shadow-2xl text-center"
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-    >
-      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-fuchsia-500 bg-clip-text animate-glow">
-        Get in Touch
-      </h1>
-      <p className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
-        For collaborations, bookings, or legal inquiries, feel free to reach out through any of the following channels.
-      </p>
+    <section className="min-h-screen py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light text-[#e1e1dd] mb-6">
+            Let's Connect
+          </h1>
+          <p className="text-lg md:text-xl text-[#71716f] max-w-3xl mx-auto leading-relaxed">
+            Whether you're looking for legal counsel, creative collaboration, or simply want to connect, 
+            I'm here to help bring your vision to life.
+          </p>
+        </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-        {contactInfo.map((info) => (
-          <motion.div
-            key={info.label}
-            className={`rounded-xl p-6 bg-gradient-to-br from-black/60 to-${info.accent}-900/30 shadow-xl border border-${info.accent}-500/40 backdrop-blur-md flex flex-col items-center`}
-            whileHover={{ translateY: -5, scale: 1.03 }}
-          >
-            <Icon icon={info.icon} className={`text-4xl mb-4 text-${info.accent}-300`} />
-            <h2 className={`text-2xl font-semibold text-${info.accent}-200 mb-3`}>{info.label}</h2>
-            <a
+        {/* Contact Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {contactInfo.map((info, index) => (
+            <motion.a
+              key={info.label}
               href={info.link}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-block text-gray-300 hover:text-${info.accent}-400 transition-colors font-medium`}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/30 hover:border-indigo-500/40 transition-all duration-300"
             >
-              {info.value}
-            </a>
-          </motion.div>
-        ))}
-      </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <div className="relative z-10">
+                <Icon 
+                  icon={info.icon} 
+                  className="text-5xl text-indigo-400 mb-4 group-hover:text-indigo-300 transition-colors duration-300" 
+                />
+                <h3 className="text-2xl font-semibold text-[#e1e1dd] mb-2">
+                  {info.label}
+                </h3>
+                <p className="text-[#bcbcb8] mb-3 font-medium">
+                  {info.value}
+                </p>
+                <p className="text-sm text-[#71716f] leading-relaxed">
+                  {info.description}
+                </p>
+              </div>
+            </motion.a>
+          ))}
+        </div>
 
-      <div className="mt-12 bg-black/40 p-8 rounded-xl backdrop-blur-md border border-indigo-700/40">
-        <h2 className="text-2xl font-semibold text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-fuchsia-500 bg-clip-text mb-4">
-          Business Hours
-        </h2>
-        <p className="text-gray-300">
-          Available for consultations and bookings Monday through Friday, 9:00 AM - 5:00 PM EAT
-        </p>
-      </div>
-
-      <div className="mt-8 flex justify-center space-x-4">
-        <button
-          onClick={() => scrollToSection('home')}
-          className="bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 text-white px-6 py-2 rounded-md hover:from-fuchsia-500 hover:to-indigo-500 transition-colors font-medium"
+        {/* Business Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="bg-gray-900/30 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-gray-700/30 text-center"
         >
-          Back to Top
-        </button>
+          <h2 className="text-3xl md:text-4xl font-light text-[#e1e1dd] mb-6">
+            Business Hours
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div>
+              <h3 className="text-xl font-medium text-indigo-400 mb-3">Legal Consultations</h3>
+              <p className="text-[#bcbcb8] leading-relaxed">
+                Monday - Friday<br />
+                9:00 AM - 5:00 PM EAT
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium text-indigo-400 mb-3">Creative Projects</h3>
+              <p className="text-[#bcbcb8] leading-relaxed">
+                Flexible scheduling<br />
+                Available for bookings
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="text-center mt-16"
+        >
+          <p className="text-lg text-[#71716f] mb-8">
+            Ready to start a conversation?
+          </p>
+          <motion.a
+            href="mailto:diegomwesigwa278@gmail.com"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-3 bg-transparent border-2 border-[#e1e1dd] text-[#e1e1dd] px-8 py-4 rounded-lg text-lg font-medium hover:bg-[#e1e1dd] hover:text-[#090A17] transition-all duration-300"
+          >
+            <Icon icon="mdi:email" className="text-xl" />
+            Send Email
+          </motion.a>
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }
 
